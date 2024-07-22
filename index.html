@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 1539px;
+            height: 1243px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/L.Control.Layers.Tree.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/proj4.js"></script>
+        <script src="js/proj4leaflet.js"></script>
+        <script src="data/VdG_fondgris_0.js"></script>
+        <script src="data/Batiments_VdG_decoupeselonbuffer_1.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var crs = new L.Proj.CRS('EPSG:2056', '+proj=somerc +lat_0=46.9524055555556 +lon_0=7.43958333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs', {
+            resolutions: [2800, 1400, 700, 350, 175, 84, 42, 21, 11.2, 5.6, 2.8, 1.4, 0.7, 0.35, 0.14, 0.07],
+        });
+        var map = L.map('map', {
+            crs: crs,
+            continuousWorld: false,
+            worldCopyJump: false, 
+            zoomControl:false, maxZoom:28, minZoom:1
+        }).fitBounds([[46.18148391240136,6.091065887563598],[46.23690832726747,6.189247267938814]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        // remove popup's row if "visible-with-data"
+        function removeEmptyRowsFromPopupContent(content, feature) {
+         var tempDiv = document.createElement('div');
+         tempDiv.innerHTML = content;
+         var rows = tempDiv.querySelectorAll('tr');
+         for (var i = 0; i < rows.length; i++) {
+             var td = rows[i].querySelector('td.visible-with-data');
+             var key = td ? td.id : '';
+             if (td && td.classList.contains('visible-with-data') && feature.properties[key] == null) {
+                 rows[i].parentNode.removeChild(rows[i]);
+             }
+         }
+         return tempDiv.innerHTML;
+        }
+        // add class to format popup if it contains media
+		function addClassToPopupIfMedia(content, popup) {
+			var tempDiv = document.createElement('div');
+			tempDiv.innerHTML = content;
+			if (tempDiv.querySelector('td img')) {
+				popup._contentNode.classList.add('media');
+					// Delay to force the redraw
+					setTimeout(function() {
+						popup.update();
+					}, 10);
+			} else {
+				popup._contentNode.classList.remove('media');
+			}
+		}
+        var zoomControl = L.control.zoom({
+            position: 'topleft'
+        }).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0].innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0].className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_VdG_fondgris_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMMUNE'] !== null ? autolinker.link(feature.properties['COMMUNE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NO_COMM'] !== null ? autolinker.link(feature.properties['NO_COMM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ABREVIATION'] !== null ? autolinker.link(feature.properties['ABREVIATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NO_COM_FEDERAL'] !== null ? autolinker.link(feature.properties['NO_COM_FEDERAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LIEN_WWW'] !== null ? autolinker.link(feature.properties['LIEN_WWW'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Length'] !== null ? autolinker.link(feature.properties['SHAPE_Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? autolinker.link(feature.properties['SHAPE_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_VdG_fondgris_0_0() {
+            return {
+                pane: 'pane_VdG_fondgris_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,250,250,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_VdG_fondgris_0');
+        map.getPane('pane_VdG_fondgris_0').style.zIndex = 400;
+        map.getPane('pane_VdG_fondgris_0').style['mix-blend-mode'] = 'normal';
+        var layer_VdG_fondgris_0 = new L.geoJson(json_VdG_fondgris_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VdG_fondgris_0',
+            layerName: 'layer_VdG_fondgris_0',
+            pane: 'pane_VdG_fondgris_0',
+            onEachFeature: pop_VdG_fondgris_0,
+            style: style_VdG_fondgris_0_0,
+        });
+        bounds_group.addLayer(layer_VdG_fondgris_0);
+        map.addLayer(layer_VdG_fondgris_0);
+        function pop_Batiments_VdG_decoupeselonbuffer_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_originel'] !== null ? autolinker.link(feature.properties['fid_originel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMMUNE'] !== null ? autolinker.link(feature.properties['COMMUNE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NO_COMM'] !== null ? autolinker.link(feature.properties['NO_COMM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NO_BATIMENT'] !== null ? autolinker.link(feature.properties['NO_BATIMENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['IDENT'] !== null ? autolinker.link(feature.properties['IDENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EGID'] !== null ? autolinker.link(feature.properties['EGID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMBAT'] !== null ? autolinker.link(feature.properties['NOMBAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MUTNUM'] !== null ? autolinker.link(feature.properties['MUTNUM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DATEDT'] !== null ? autolinker.link(feature.properties['DATEDT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DESTINATION'] !== null ? autolinker.link(feature.properties['DESTINATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMENCLATURE'] !== null ? autolinker.link(feature.properties['NOMENCLATURE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMEN_CLASSE'] !== null ? autolinker.link(feature.properties['NOMEN_CLASSE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PROVENANCE'] !== null ? autolinker.link(feature.properties['PROVENANCE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NO_AUTOR'] !== null ? autolinker.link(feature.properties['NO_AUTOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EPOQUE_CONSTRUCTION'] !== null ? autolinker.link(feature.properties['EPOQUE_CONSTRUCTION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANNEE_CONSTRUCTION'] !== null ? autolinker.link(feature.properties['ANNEE_CONSTRUCTION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANNEE_TRANSFORNATION'] !== null ? autolinker.link(feature.properties['ANNEE_TRANSFORNATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NIVEAUX_HORSOL'] !== null ? autolinker.link(feature.properties['NIVEAUX_HORSOL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NIVEAUX_SSOL'] !== null ? autolinker.link(feature.properties['NIVEAUX_SSOL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HAUTEUR'] !== null ? autolinker.link(feature.properties['HAUTEUR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SURFACE'] !== null ? autolinker.link(feature.properties['SURFACE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EGRID_LISTE'] !== null ? autolinker.link(feature.properties['EGRID_LISTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EGRID_CENTROIDE'] !== null ? autolinker.link(feature.properties['EGRID_CENTROIDE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Length'] !== null ? autolinker.link(feature.properties['SHAPE_Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? autolinker.link(feature.properties['SHAPE_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tampon50m'] !== null ? autolinker.link(feature.properties['tampon50m'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tampon50m_chevauche'] !== null ? autolinker.link(feature.properties['tampon50m_chevauche'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Batiments_VdG_decoupeselonbuffer_1_0(feature) {
+            switch(String(feature.properties['tampon50m_chevauche'])) {
+                case 'true':
+                    return {
+                pane: 'pane_Batiments_VdG_decoupeselonbuffer_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(20,191,253,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Batiments_VdG_decoupeselonbuffer_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Batiments_VdG_decoupeselonbuffer_1');
+        map.getPane('pane_Batiments_VdG_decoupeselonbuffer_1').style.zIndex = 401;
+        map.getPane('pane_Batiments_VdG_decoupeselonbuffer_1').style['mix-blend-mode'] = 'normal';
+        var layer_Batiments_VdG_decoupeselonbuffer_1 = new L.geoJson(json_Batiments_VdG_decoupeselonbuffer_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Batiments_VdG_decoupeselonbuffer_1',
+            layerName: 'layer_Batiments_VdG_decoupeselonbuffer_1',
+            pane: 'pane_Batiments_VdG_decoupeselonbuffer_1',
+            onEachFeature: pop_Batiments_VdG_decoupeselonbuffer_1,
+            style: style_Batiments_VdG_decoupeselonbuffer_1_0,
+        });
+        bounds_group.addLayer(layer_Batiments_VdG_decoupeselonbuffer_1);
+        map.addLayer(layer_Batiments_VdG_decoupeselonbuffer_1);
+        var baseMaps = {};
+        var overlaysTree = [
+            {label: 'Batiments_VdG_decoupe selon buffer<br /><table><tr><td style="text-align: center;"><img src="legend/Batiments_VdG_decoupeselonbuffer_1_Amoinsde50mdunaménagement0.png" /></td><td>A moins de 50m d\'un aménagement</td></tr><tr><td style="text-align: center;"><img src="legend/Batiments_VdG_decoupeselonbuffer_1_Aplusde50mdunaménagement1.png" /></td><td>A plus de 50m d\'un aménagement</td></tr></table>', layer: layer_Batiments_VdG_decoupeselonbuffer_1},
+            {label: '<img src="legend/VdG_fondgris_0.png" /> VdG_fond gris', layer: layer_VdG_fondgris_0},]
+        var lay = L.control.layers.tree(null, overlaysTree,{
+            //namedToggle: true,
+            //selectorBack: false,
+            //closedSymbol: '&#8862; &#x1f5c0;',
+            //openedSymbol: '&#8863; &#x1f5c1;',
+            //collapseAll: 'Collapse all',
+            //expandAll: 'Expand all',
+            collapsed: true,
+        });
+        lay.addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
