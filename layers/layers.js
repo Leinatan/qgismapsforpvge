@@ -1,5 +1,5 @@
 ol.proj.proj4.register(proj4);
-//ol.proj.get("EPSG:3857").setExtent([636226.701335, 5766896.312721, 753177.831970, 5854645.014727]);
+//ol.proj.get("EPSG:3857").setExtent([668036.489663, 5800747.796270, 696903.055008, 5822684.971772]);
 var wms_layers = [];
 
 
@@ -27,8 +27,9 @@ var lyr_Maillagefin_1 = new ol.layer.Vector({
                 style: style_Maillagefin_1,
                 popuplayertitle: "Maillage fin",
                 interactive: true,
-                title: '<img src="styles/legend/Maillagefin_1.png" /> Maillage fin'
-            });
+    title: 'Maillage fin<br />\
+    <img src="styles/legend/Maillagefin_1_0.png" /> RVS<br />'
+        });
 var format_Rseausecondaire_2 = new ol.format.GeoJSON();
 var features_Rseausecondaire_2 = format_Rseausecondaire_2.readFeatures(json_Rseausecondaire_2, 
             {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
