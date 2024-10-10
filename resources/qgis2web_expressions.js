@@ -763,3 +763,238 @@ function fnc__specialcol_(values, context) {
 function fnc_project_color(values, context) {
     return false;
 };
+
+
+
+function exp_R3Axesforts_1rule0_eval_expression(context) {
+    // LINE_NR = 'A'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'A');
+    } else {
+        return (feature.get('LINE_NR')  == 'A');
+    }
+}
+
+
+function exp_R3Axesforts_1rule1_eval_expression(context) {
+    // LINE_NR = 'B'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'B');
+    } else {
+        return (feature.get('LINE_NR')  == 'B');
+    }
+}
+
+
+function exp_R3Axesforts_1rule2_eval_expression(context) {
+    // LINE_NR = 'C'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'C');
+    } else {
+        return (feature.get('LINE_NR')  == 'C');
+    }
+}
+
+
+function exp_R3Axesforts_1rule3_eval_expression(context) {
+    // LINE_NR = 'D'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'D');
+    } else {
+        return (feature.get('LINE_NR')  == 'D');
+    }
+}
+
+
+function exp_R3Axesforts_1rule4_eval_expression(context) {
+    // LINE_NR = 'E'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'E');
+    } else {
+        return (feature.get('LINE_NR')  == 'E');
+    }
+}
+
+
+function exp_R3Axesforts_1rule5_eval_expression(context) {
+    // LINE_NR = 'MC'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'MC');
+    } else {
+        return (feature.get('LINE_NR')  == 'MC');
+    }
+}
+
+
+function exp_R3Axesforts_1rule6_eval_expression(context) {
+    // LINE_NR = 'PC'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'PC');
+    } else {
+        return (feature.get('LINE_NR')  == 'PC');
+    }
+}
+
+
+function exp_R3Axesforts_1rule7_eval_expression(context) {
+    // LINE_NR = 'CGN1' OR LINE_NR = 'CGN2'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return ((feature.get('LINE_NR')  == 'CGN1') || (feature.get('LINE_NR')  == 'CGN2'));
+    } else {
+        return ((feature.get('LINE_NR')  == 'CGN1') || (feature.get('LINE_NR')  == 'CGN2'));
+    }
+}
+
+
+function exp_R3Axesforts_1rule8_eval_expression(context) {
+    // LINE_NR = 'GC'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'GC');
+    } else {
+        return (feature.get('LINE_NR')  == 'GC');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule0_eval_expression(context) {
+    // LINE_NR = 'Z'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'Z');
+    } else {
+        return (feature.get('LINE_NR')  == 'Z');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule1_eval_expression(context) {
+    // LINE_NR = 'V'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'V');
+    } else {
+        return (feature.get('LINE_NR')  == 'V');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule2_eval_expression(context) {
+    // LINE_NR = 'T'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'T');
+    } else {
+        return (feature.get('LINE_NR')  == 'T');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule3_eval_expression(context) {
+    // LINE_NR = 'U'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'U');
+    } else {
+        return (feature.get('LINE_NR')  == 'U');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule4_eval_expression(context) {
+    // LINE_NR = 'X'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'X');
+    } else {
+        return (feature.get('LINE_NR')  == 'X');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule5_eval_expression(context) {
+    // LINE_NR = 'Y'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'Y');
+    } else {
+        return (feature.get('LINE_NR')  == 'Y');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule6_eval_expression(context) {
+    // LINE_NR = 'W'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'W');
+    } else {
+        return (feature.get('LINE_NR')  == 'W');
+    }
+}
+
+
+function exp_R3Liaisonsprincipales_2rule7_eval_expression(context) {
+    // LINE_NR = 'P'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'P');
+    } else {
+        return (feature.get('LINE_NR')  == 'P');
+    }
+}
+
+
+function exp_R3Liaisonssecondaires_3rule0_eval_expression(context) {
+    // LINE_NR = 'RVS'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'RVS');
+    } else {
+        return (feature.get('LINE_NR')  == 'RVS');
+    }
+}
