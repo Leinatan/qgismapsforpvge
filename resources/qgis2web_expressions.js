@@ -179,8 +179,8 @@ function fnc_coalesce(values, context) {
 };
 
 function fnc_if(values, context) {
-    return false;
-};
+    return values[0] ? values[1] : values[2];
+}
 
 function fnc_aggregate(values, context) {
     return false;
@@ -766,137 +766,7 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_20250331_Liaisonssecondaires_1rule0_eval_expression(context) {
-    // LINE_NR = 'RVS'
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 'RVS');
-    } else {
-        return (feature.get('LINE_NR')  == 'RVS');
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule0_eval_expression(context) {
-    // LINE_NR = 10
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 10);
-    } else {
-        return (feature.get('LINE_NR')  == 10);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule1_eval_expression(context) {
-    // LINE_NR = 11
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 11);
-    } else {
-        return (feature.get('LINE_NR')  == 11);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule2_eval_expression(context) {
-    // LINE_NR = 12
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 12);
-    } else {
-        return (feature.get('LINE_NR')  == 12);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule3_eval_expression(context) {
-    // LINE_NR = 13
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 13);
-    } else {
-        return (feature.get('LINE_NR')  == 13);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule4_eval_expression(context) {
-    // LINE_NR = 20
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 20);
-    } else {
-        return (feature.get('LINE_NR')  == 20);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule5_eval_expression(context) {
-    // LINE_NR = 40
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 40);
-    } else {
-        return (feature.get('LINE_NR')  == 40);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule6_eval_expression(context) {
-    // LINE_NR = 21
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 21);
-    } else {
-        return (feature.get('LINE_NR')  == 21);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule7_eval_expression(context) {
-    // LINE_NR = 30
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 30);
-    } else {
-        return (feature.get('LINE_NR')  == 30);
-    }
-}
-
-
-function exp_20250331_Liaisonsprincipales_2rule8_eval_expression(context) {
-    // LINE_NR = 31
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 31);
-    } else {
-        return (feature.get('LINE_NR')  == 31);
-    }
-}
-
-
-function exp_20250331_Axesforts_3rule0_eval_expression(context) {
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule0_eval_expression(context) {
     // LINE_NR = 'A'
 
     var feature = context.feature;
@@ -909,7 +779,7 @@ function exp_20250331_Axesforts_3rule0_eval_expression(context) {
 }
 
 
-function exp_20250331_Axesforts_3rule1_eval_expression(context) {
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule1_eval_expression(context) {
     // LINE_NR = 'B'
 
     var feature = context.feature;
@@ -922,7 +792,7 @@ function exp_20250331_Axesforts_3rule1_eval_expression(context) {
 }
 
 
-function exp_20250331_Axesforts_3rule2_eval_expression(context) {
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule2_eval_expression(context) {
     // LINE_NR = 'C'
 
     var feature = context.feature;
@@ -935,7 +805,7 @@ function exp_20250331_Axesforts_3rule2_eval_expression(context) {
 }
 
 
-function exp_20250331_Axesforts_3rule3_eval_expression(context) {
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule3_eval_expression(context) {
     // LINE_NR = 'D'
 
     var feature = context.feature;
@@ -948,7 +818,7 @@ function exp_20250331_Axesforts_3rule3_eval_expression(context) {
 }
 
 
-function exp_20250331_Axesforts_3rule4_eval_expression(context) {
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule4_eval_expression(context) {
     // LINE_NR = 'E'
 
     var feature = context.feature;
@@ -961,20 +831,7 @@ function exp_20250331_Axesforts_3rule4_eval_expression(context) {
 }
 
 
-function exp_20250331_Axesforts_3rule5_eval_expression(context) {
-    // LINE_NR = 'MC'
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (feature.get('LINE_NR')  == 'MC');
-    } else {
-        return (feature.get('LINE_NR')  == 'MC');
-    }
-}
-
-
-function exp_20250331_Axesforts_3rule6_eval_expression(context) {
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule5_eval_expression(context) {
     // LINE_NR = 'PC'
 
     var feature = context.feature;
@@ -987,7 +844,33 @@ function exp_20250331_Axesforts_3rule6_eval_expression(context) {
 }
 
 
-function exp_20250331_Axesforts_3rule7_eval_expression(context) {
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule6_eval_expression(context) {
+    // LINE_NR = 'MC'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'MC');
+    } else {
+        return (feature.get('LINE_NR')  == 'MC');
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule7_eval_expression(context) {
+    // LINE_NR = 'GC'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'GC');
+    } else {
+        return (feature.get('LINE_NR')  == 'GC');
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule8_eval_expression(context) {
     // LINE_NR = 'CGN1' OR LINE_NR = 'CGN2'
 
     var feature = context.feature;
@@ -1000,14 +883,144 @@ function exp_20250331_Axesforts_3rule7_eval_expression(context) {
 }
 
 
-function exp_20250331_Axesforts_3rule8_eval_expression(context) {
-    // LINE_NR = 'GC'
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule9_eval_expression(context) {
+    // LINE_NR = 10
 
     var feature = context.feature;
     
     if (feature.properties) {
-        return (feature.get('LINE_NR')  == 'GC');
+        return (feature.get('LINE_NR')  == 10);
     } else {
-        return (feature.get('LINE_NR')  == 'GC');
+        return (feature.get('LINE_NR')  == 10);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule10_eval_expression(context) {
+    // LINE_NR = 11
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 11);
+    } else {
+        return (feature.get('LINE_NR')  == 11);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule11_eval_expression(context) {
+    // LINE_NR = 12
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 12);
+    } else {
+        return (feature.get('LINE_NR')  == 12);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule12_eval_expression(context) {
+    // LINE_NR = 13
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 13);
+    } else {
+        return (feature.get('LINE_NR')  == 13);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule13_eval_expression(context) {
+    // LINE_NR = 20
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 20);
+    } else {
+        return (feature.get('LINE_NR')  == 20);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule14_eval_expression(context) {
+    // LINE_NR = 40
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 40);
+    } else {
+        return (feature.get('LINE_NR')  == 40);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule15_eval_expression(context) {
+    // LINE_NR = 21
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 21);
+    } else {
+        return (feature.get('LINE_NR')  == 21);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule16_eval_expression(context) {
+    // LINE_NR = 30
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 30);
+    } else {
+        return (feature.get('LINE_NR')  == 30);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule17_eval_expression(context) {
+    // LINE_NR = 31
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 31);
+    } else {
+        return (feature.get('LINE_NR')  == 31);
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule18_eval_expression(context) {
+    // LINE_NR = 'Z'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'Z');
+    } else {
+        return (feature.get('LINE_NR')  == 'Z');
+    }
+}
+
+
+function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule19_eval_expression(context) {
+    // LINE_NR = 'RVS'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('LINE_NR')  == 'RVS');
+    } else {
+        return (feature.get('LINE_NR')  == 'RVS');
     }
 }
