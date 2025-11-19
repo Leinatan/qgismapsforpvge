@@ -44,7 +44,29 @@
         }
         </style>
         <title>Plan du réseau cyclable utilitaire - Comparaison réseau OCT vs réseau PVGE</title>
-    </head>
+    </head> 
+
+<!-- Section pour mot de passe -->
+
+    <script>
+        // Mot de passe à modifier selon vos besoins
+        const PASSWORD = "secret";
+
+        // Fonction de protection
+        (function protectPage() {
+            const passcode = prompt("Entrez le mot de passe pour accéder à la carte :");
+            if (passcode !== PASSWORD) {
+                alert("Mot de passe incorrect. Accès refusé.");
+                return protectPage(); // Redemande
+            }
+            // Affiche la carte si le mot de passe est correct
+            document.getElementById("map").style.display = "block";
+            alert("Accès autorisé. Bienvenue !");
+        })();
+    </script>
+
+<!-- Section pour mot de passe -->
+
     <body>
         <div id="map">
             <div id="popup" class="ol-popup">
