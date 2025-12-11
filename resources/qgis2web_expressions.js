@@ -1024,3 +1024,81 @@ function exp_20250331_ReseauVeloReseauVeloUtilitaire_1rule19_eval_expression(con
         return (feature.get('LINE_NR')  == 'RVS');
     }
 }
+
+
+function exp_Equipementpublicespacepublicobs_equipements_espaces_pub_2rule0_eval_expression(context) {
+    // CATEGORIE  IN ('Espace vert', 'Parc', 'Plage', 'Place', 'Cimetière')
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return "'Espace vert', 'Parc', 'Plage', 'Place', 'Cimeti\u00e8re'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    } else {
+        return "'Espace vert', 'Parc', 'Plage', 'Place', 'Cimeti\u00e8re'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    }
+}
+
+
+function exp_quipementpublicEnseignement_5rule0_eval_expression(context) {
+    // CATEGORIE  IN ('Centre de formation', 'Haute école spécialisée/supérieure', 'Université')
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return "'Centre de formation', 'Haute \u00e9cole sp\u00e9cialis\u00e9e/sup\u00e9rieure', 'Universit\u00e9'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    } else {
+        return "'Centre de formation', 'Haute \u00e9cole sp\u00e9cialis\u00e9e/sup\u00e9rieure', 'Universit\u00e9'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    }
+}
+
+
+function exp_quipementpublicEnseignement_5rule1_eval_expression(context) {
+    // CATEGORIE = 'Ecole spécialisée'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('CATEGORIE')  == 'Ecole spécialisée');
+    } else {
+        return (feature.get('CATEGORIE')  == 'Ecole spécialisée');
+    }
+}
+
+
+function exp_quipementpublicEnseignement_5rule2_eval_expression(context) {
+    // CATEGORIE  IN ('Secondaire II', 'Secondaire I')
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return "'Secondaire II', 'Secondaire I'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    } else {
+        return "'Secondaire II', 'Secondaire I'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    }
+}
+
+
+function exp_quipementpublicEnseignement_5rule3_eval_expression(context) {
+    // CATEGORIE  IN ('Parascolaire', 'Ecole primaire', 'Ludothèque')
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return "'Parascolaire', 'Ecole primaire', 'Ludoth\u00e8que'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    } else {
+        return "'Parascolaire', 'Ecole primaire', 'Ludoth\u00e8que'".indexOf(feature.get('CATEGORIE') ) > -1 ;
+    }
+}
+
+
+function exp_quipementpublicEnseignement_5rule4_eval_expression(context) {
+    // CATEGORIE = 'Espace de vie enfantine (EVE)'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.get('CATEGORIE')  == 'Espace de vie enfantine (EVE)');
+    } else {
+        return (feature.get('CATEGORIE')  == 'Espace de vie enfantine (EVE)');
+    }
+}
